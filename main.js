@@ -12,12 +12,16 @@ const playerPosition = {
     x: undefined,
     y: undefined,
 }
-
+const giftPosition = {
+    x: undefined,
+    y: undefined,
+}
+let bombsPositions = [];
 
 window.addEventListener('load',setCanvasSize);
 window.addEventListener('resize',setCanvasSize);
 
-
+/* Principal functions to render game, map and player */
 function setCanvasSize(){
     // Llenado del mapa , junto con las dimensiones del canvas.
     if(window.innerHeight > window.innerWidth){
@@ -39,11 +43,14 @@ function startGame(){
     game.font = elementSize + 'px Verdana';
     game.textAlign = '';
 
-    const map = maps[0]; // asigno primer mapa a una variable
+    const map = maps[0 ]; // asigno primer mapa a una variable
     const mapRows = map.trim().split('\n');
     const mapRowsCol = mapRows.map(item => item.trim().split(''));
 
+    bombsPositions = [];
     game.clearRect(0,0,canvasSize,canvasSize);
+  
+  
     mapRowsCol.forEach((row,rowI) => {
         row.forEach((col,colI)=>{
             const emoji = emojis[col];
@@ -55,14 +62,35 @@ function startGame(){
                 playerPosition.y = Math.floor(posY);
                 console.log({playerPosition});
                }
+            }else if (col =='I'){
+                giftPosition.x = posX;
+                giftPosition.y = posY;
+            }else if (col == 'X'){
+                bombsPositions.push({
+                    x: posX,
+                    y: posY,
+                })
             }
             game.fillText(emoji,posX,posY)
         })
     });
     movePlayer();
 }
+ 
 
 function movePlayer(){
+    // colision con el regalo
+    giftCollision();
+
+    const enemyCollision = bombsPositions.find(enemy =>{
+        const bombCollisionX = enemy.x == playerPosition.x;
+        const bombCollisionY = enemy.y == playerPosition.y;
+        return bombCollisionX && bombCollisionY
+    })
+
+    if(enemyCollision){
+        console.log('Chocaste con una bomba.');
+    }
     game.fillText(emojis['PLAYER'],playerPosition.x,playerPosition.y);
 }
 
@@ -109,10 +137,8 @@ function moveLeft(){
         console.log('out left');
         playerPosition.x += elementSize
     }
-
-    startGame();}
-
-    
+    startGame();
+}    
 function moveDown(){
     console.log('MoveDown');
     playerPosition.y += elementSize;
@@ -121,9 +147,7 @@ function moveDown(){
         playerPosition.y -= elementSize;
     }
     startGame();
-}
-    
-    
+} 
 function moveRight(){
     console.log('move right');
     playerPosition.x += elementSize;
@@ -135,5 +159,15 @@ function moveRight(){
 }
 
 
+// Collision
 
+function giftCollision(){
+    const giftCollisionX = playerPosition.x == giftPosition.x ;
+    const giftCollisionY = playerPosition.y == giftPosition.y ;
+    const giftCollision = giftCollisionX && giftCollisionY;
+    if (giftCollision){
+        console.log('Has pasado al siguiente nivel');
+    }
+
+}
 
