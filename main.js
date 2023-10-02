@@ -21,15 +21,15 @@ window.addEventListener('resize',setCanvasSize);
 function setCanvasSize(){
     // Llenado del mapa , junto con las dimensiones del canvas.
     if(window.innerHeight > window.innerWidth){
-        canvasSize = window.innerWidth * .7;
+        canvasSize = Math.floor( window.innerWidth * .7);
     }else{
-        canvasSize = window.innerHeight *.7;
+        canvasSize = Math.floor(window.innerHeight *.7);
     }
     
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height',canvasSize);
     
-    elementSize = (canvasSize/10)- 1 ;
+    elementSize = Math.floor((canvasSize/10)- 1 );
     
     startGame();
 }
@@ -47,12 +47,12 @@ function startGame(){
     mapRowsCol.forEach((row,rowI) => {
         row.forEach((col,colI)=>{
             const emoji = emojis[col];
-            const posX = elementSize * (colI );
-            const posY = elementSize * (rowI + .9);
+            const posX = Math.floor(elementSize * (colI ));
+            const posY = Math.floor(elementSize * (rowI + .9));
             if(col == 'O'){
                if(!playerPosition.x && !playerPosition.y){
-                playerPosition.x = posX;
-                playerPosition.y = posY;
+                playerPosition.x = Math.floor(posX);
+                playerPosition.y = Math.floor(posY);
                 console.log({playerPosition});
                }
             }
@@ -90,24 +90,49 @@ function moveKeys(e){
     }
 }
 
+
+
+/* Player moves with border restriction */
 function moveUp(){
-    console.log('MoveUp');
-    playerPosition.y -= elementSize;
-    startGame();
+    console.log(playerPosition.y);
+   playerPosition.y -= elementSize; // para subir le resto al canvas.
+   if(playerPosition.y <= 0){ // si la posicion es menor a cero
+    console.log('out top')
+    playerPosition.y +=elementSize;
+   }
+   startGame();
 }
+function moveLeft(){
+    console.log('Move left');
+    playerPosition.x -= elementSize;
+    if(playerPosition.x < 0){
+        console.log('out left');
+        playerPosition.x += elementSize
+    }
+
+    startGame();}
+
+    
 function moveDown(){
     console.log('MoveDown');
     playerPosition.y += elementSize;
+    if(playerPosition.y >= canvasSize){
+        console.log('out down');
+        playerPosition.y -= elementSize;
+    }
     startGame();
 }
-function moveLeft(){
-    console.log('MoveLeft');
-    playerPosition.x -= elementSize;
-    startGame();}
+    
+    
 function moveRight(){
-    console.log('MoveRight');
+    console.log('move right');
     playerPosition.x += elementSize;
-    startGame();}
+    if(playerPosition.x > elementSize*9){
+        console.log('Out Right')
+        playerPosition.x -= elementSize;
+    }
+    startGame();
+}
 
 
 
