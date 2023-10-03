@@ -29,8 +29,8 @@ canvas{
     margin: 0 auto;
     display: grid;
     gap: .5rem;
-    grid-template-columns: repeat(3,minmax(auto,60px));
-    grid-template-rows: repeat(2,minmax(auto,30px))
+    grid-template-columns: repeat(3,minmax(auto,150px));
+    grid-template-rows: repeat(2,minmax(auto,60px))
 }
 
 .game-container .btns button{
@@ -63,3 +63,9 @@ canvas{
 }
 
 
+.game-container .messages{
+    margin-top: 5rem;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+}
