@@ -5,9 +5,7 @@ const btnDown = document.querySelector('#down')
 const btnRight = document.querySelector('#right')
 const btnLeft = document.querySelector('#left')
 const spanLives = document.querySelector('#lives')
-
-let canvasSize;
-let elementSize;
+const spanTime = document.querySelector("#time")
 
 const playerPosition = {
     x: undefined,
@@ -17,10 +15,15 @@ const giftPosition = {
     x: undefined,
     y: undefined,
 }
+let canvasSize;
+let elementSize;
 let bombsPositions = [];
 let level = 0;
 let lives = 3;
 
+let timeStart;
+let timePlayer;
+let interval;
 
 
 window.addEventListener('load',setCanvasSize);
@@ -54,6 +57,11 @@ function startGame(){
         gameWin();
         return;
     }
+    if(!timeStart){
+        timeStart = Date.now();
+        interval = setInterval(showTime,100);
+    }
+
 
     const mapRows = map.trim().split('\n');
     const mapRowsCol = mapRows.map(item => item.trim().split(''));
@@ -91,8 +99,8 @@ function startGame(){
 function movePlayer(){
     // colision con el regalo
     giftCollision();
-    bombCollision();
-    game.fillText(emojis['PLAYER'],playerPosition.x,playerPosition.y);
+/*     bombCollision();
+ */    game.fillText(emojis['PLAYER'],playerPosition.x,playerPosition.y);
 }
 
 window.addEventListener('keydown',moveKeys);
@@ -168,10 +176,10 @@ function nextLevel(){
 }
 function gameWin(){
     alert('Has completado el juego');
+    clearInterval(interval);
 }
 function levelFail(){
     lives--;
-   
     if(lives <= 0){
         level = 0;
         lives = 3;
@@ -189,18 +197,23 @@ function showLives(){
     hearts.forEach(heart => spanLives.append(heart));
 }
 
-// Collision
+function showTime(){
+    spanTime.innerHTML = ((Date.now() - timeStart) /1000).toFixed(0);
+}
 
+// Collision.
 function giftCollision(){
     const giftCollisionX = playerPosition.x == giftPosition.x ;
     const giftCollisionY = playerPosition.y == giftPosition.y ;
     const giftCollision = giftCollisionX && giftCollisionY;
     if (giftCollision){
        nextLevel();
+    }else if (level == 5){
+        gameWin();
     }
 }
 
-function bombCollision(){
+/* function bombCollision(){
     const enemyCollision = bombsPositions.find(enemy =>{
         const bombCollisionX = enemy.x == playerPosition.x;
         const bombCollisionY = enemy.y == playerPosition.y;
@@ -212,3 +225,5 @@ function bombCollision(){
     }
 }
 
+
+ */

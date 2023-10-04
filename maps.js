@@ -59,24 +59,24 @@ const emojis = {
     XXX-XX--XXX
     XX--------XX
     X--XXXX-XXXX
-    XXX----XXXXX
+    X-----XXXXX
     XX--X--XXXXX
     XXX-X-I--X
     XXXXXXXXXXX`
   )
 
   maps.push(`
-  -XXXXX----
-  ------X-X-
-  X--XX-XX--
-  -X-XX-X-XX
-  XXX---X-X-
-  --XXOXXX-X
-  --XXX-----
-  --XX----X-
-  XXXX-XI---
-  ------XX--
-  X-XX--X-XX`
+    -XXXXX----
+    ------X-X-
+    X--XX-XX--
+    -X-XX-X-XX
+    X-----X-X-
+    --XXOXXX-X
+    --XXX-----
+    --XX----X-
+    --XX--XI--
+    ------XX--
+    X-XX--X-XX`
   )
 
   maps.push(`
@@ -85,22 +85,9 @@ const emojis = {
     XX----XXXX
     X--XX-XXXX
     X-XXX--XXX
-    X-XXXX-XXX
+    X---XX-XXX
     XX--XX--XX
     XX--XXX-XX
-    XXXX---IXX
+    XX-----IXX
     XXXXXXXXXX`
-  )
-
-  maps.push(`
-    OXXXXXXXXX
-    X---------
-    X-XXXXXXXX
-    X-XXXX----
-    X-XXXXXXXX
-    X-XXXX---X
-    X-XXXXXXXX
-    X-XXXX---X
-    X-XXXXXXXX
-    XXXXXXXX-I`
   )
