@@ -5,7 +5,10 @@ const btnDown = document.querySelector('#down')
 const btnRight = document.querySelector('#right')
 const btnLeft = document.querySelector('#left')
 const spanLives = document.querySelector('#lives')
-const spanTime = document.querySelector("#time")
+const spanTime = document.querySelector("#time");
+const spanRecord = document.querySelector("#record")
+const pResult = document.querySelector("#result");
+const alerta = document.querySelector('.active');
 
 const playerPosition = {
     x: undefined,
@@ -43,12 +46,14 @@ function setCanvasSize(){
     canvas.setAttribute('height',canvasSize);
     
     elementSize = Math.floor((canvasSize/10)- 1 );
-    
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
     startGame();
 }
 
 function startGame(){
-    
+    alerta.classList.add('active');
+
     game.font = elementSize + 'px Verdana';
     game.textAlign = '';
 
@@ -60,6 +65,7 @@ function startGame(){
     if(!timeStart){
         timeStart = Date.now();
         interval = setInterval(showTime,100);
+        showRecord();
     }
 
 
@@ -99,8 +105,8 @@ function startGame(){
 function movePlayer(){
     // colision con el regalo
     giftCollision();
-/*     bombCollision();
- */    game.fillText(emojis['PLAYER'],playerPosition.x,playerPosition.y);
+    /* bombCollision(); */
+    game.fillText(emojis['PLAYER'],playerPosition.x,playerPosition.y);
 }
 
 window.addEventListener('keydown',moveKeys);
@@ -175,14 +181,31 @@ function nextLevel(){
     startGame();
 }
 function gameWin(){
-    alert('Has completado el juego');
-    clearInterval(interval);
+    window.clearInterval(interval);
+    alerta.classList.remove('active');
+    level = 0;
+
+    const recordTime = localStorage.getItem('record_time')
+    const playerTime = ((Date.now() - timeStart) /1000).toFixed(0);
+    if(!recordTime){
+        localStorage.setItem('record_time',playerTime);
+        pResult.innerHTML = 'Primera vez?, supera el Record';
+    }else{
+        if(recordTime < playerTime){
+            pResult.innerHTML = 'Superaste el RECORD';
+            localStorage.setItem('record_time',playerTime);
+        }else{
+            pResult.innerHTML = 'No superaste el record';
+        }
+    }
+    console.log({recordTime,playerTime});
 }
 function levelFail(){
     lives--;
     if(lives <= 0){
         level = 0;
         lives = 3;
+        timeStart = undefined;
     }
     playerPosition.x = undefined;
     playerPosition.y = undefined;
@@ -199,6 +222,9 @@ function showLives(){
 
 function showTime(){
     spanTime.innerHTML = ((Date.now() - timeStart) /1000).toFixed(0);
+}
+function showRecord(){
+    spanRecord.innerHTML = localStorage.getItem('record_time');
 }
 
 // Collision.
@@ -223,7 +249,6 @@ function giftCollision(){
     if(enemyCollision){
         levelFail();
     }
-}
+} */
 
 
- */

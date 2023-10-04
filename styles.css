@@ -11,24 +11,37 @@ body{
 }
 
 .game-container{
+    position: relative;
     width:100vw;
     height: 100vh;
     background-color: blueviolet;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
 }
 canvas{
+    margin-top:2rem;
     border: 2px solid white;
     border-radius: .5rem;
     background-color:darkseagreen;
 }
 
+.notifications{
+    width: 50rem;
+    height: 20rem;
+    background-color: white;
+    position: absolute;
+    top:10rem;
+}
+.active{
+    display: none;
+}
+
+
 .game-container .btns{
-    margin: 0 auto;
     display: grid;
-    gap: .5rem;
+    gap: 2rem;
     grid-template-columns: repeat(3,minmax(auto,70px));
     grid-template-rows: repeat(2,minmax(auto,60px))
 }
@@ -64,15 +77,19 @@ canvas{
 
 
 .bottom{
+    margin: 0 auto;
+    height: 100%;
+    margin-top:5rem;
     display:flex;
     flex-direction: row-reverse;
     gap:16rem;
 }
 
 .game-container .messages{
-    width : 60%;
-    margin-top: 5rem;
-    text-align: center;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
+}
+
+.game-container .messages #result {
+    font-size: 2.5rem;
 }
