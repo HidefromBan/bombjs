@@ -29,10 +29,10 @@ const emojis = {
     OXXXXXXXXX
   `);
   maps.push(`
-    O--XXXXXXX
+    X--XXXXXXX
     X--XXXXXXX
     XX----XXXX
-    X--XX-XXXX
+    O--XX-XXXX
     X-XXX--XXX
     X-XXXX-XXX
     XX--XX--XX
@@ -66,17 +66,16 @@ const emojis = {
   )
 
   maps.push(`
-    -XXXXX----
-    ------X-X-
+    -XXOXX----
+    --X---X-X-
     X--XX-XX--
-    -X-XX-X-XX
-    X-----X-X-
-    --XXOXXX-X
-    --XXX-----
-    --XX----X-
-    --XX--XI--
-    ------XX--
-    X-XX--X-XX`
+    -X-XX-XXXX
+    X-----XXXX
+    X--XXXX-XX
+    X--XX-XXXX
+    X--X-X--X-
+    XX--X-XXXX
+    I---XXX-XX`
   )
 
   maps.push(`

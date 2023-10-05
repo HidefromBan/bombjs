@@ -178,6 +178,8 @@ function moveRight(){
 function nextLevel(){
     console.log('subiste al prox nivel');
     level++;
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
     startGame();
 }
 function gameWin(){
@@ -234,7 +236,7 @@ function giftCollision(){
     const giftCollision = giftCollisionX && giftCollisionY;
     if (giftCollision){
        nextLevel();
-    }else if (level == 5){
+    }else if (level == 6){
         gameWin();
     }
 }
