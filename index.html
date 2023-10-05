@@ -5,6 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+
   <title>Platzriv - Jueguito online de carreras y calaveras</title>
 </head>
 <body>
@@ -12,7 +16,13 @@
     <canvas id="game"></canvas>
     
     <article class="notifications active">
-      <p>Felicidades has Ganado ! 👑</p>
+      <p>Felicidades has Ganado! 👑</p>
+      <br>
+      <p id="result"></p>
+      <div class="restart">
+        <button id="exit">Salir</button>
+        <button id="restart" onclick={restartGame()}>Reiniciar</button>
+      </div>
     </article>
     <div class="bottom">
       <div class="btns">
@@ -24,9 +34,8 @@
       <div class="messages">
         <!-- TODO -->
         <p>Vidas: <span id="lives"</span></p>
-        <p>Tiempo ⏱️: <span id="time"></span> [segundos]</p>
-        <p>Record 🏁: <span id="record"></span></p>
-        <p id="result"></p>
+        <p>Tiempo ⏱️: <span id="time"></span> [seg]</p>
+        <p>Record 🏁: <span id="record"></span> [seg]</p>
       </div>
     </div>
   </div>

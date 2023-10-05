@@ -25,7 +25,7 @@ let level = 0;
 let lives = 3;
 
 let timeStart;
-let timePlayer;
+let playerTime;
 let interval;
 
 
@@ -183,10 +183,9 @@ function nextLevel(){
     startGame();
 }
 function gameWin(){
-    window.clearInterval(interval);
+    clearTime();
     alerta.classList.remove('active');
     level = 0;
-
     const recordTime = localStorage.getItem('record_time')
     const playerTime = ((Date.now() - timeStart) /1000).toFixed(0);
     if(!recordTime){
@@ -194,13 +193,14 @@ function gameWin(){
         pResult.innerHTML = 'Primera vez?, supera el Record';
     }else{
         if(recordTime < playerTime){
-            pResult.innerHTML = 'Superaste el RECORD';
-            localStorage.setItem('record_time',playerTime);
-        }else{
             pResult.innerHTML = 'No superaste el record';
+        }else{
+            localStorage.setItem('record_time',playerTime);
+            pResult.innerHTML = 'Superaste el RECORD';
         }
     }
     console.log({recordTime,playerTime});
+
 }
 function levelFail(){
     lives--;
@@ -221,13 +221,19 @@ function showLives(){
     spanLives.innerHTML = "";
     hearts.forEach(heart => spanLives.append(heart));
 }
-
 function showTime(){
     spanTime.innerHTML = ((Date.now() - timeStart) /1000).toFixed(0);
+}
+function clearTime(){
+    window.clearInterval(interval);
 }
 function showRecord(){
     spanRecord.innerHTML = localStorage.getItem('record_time');
 }
+function restartGame(){
+    location.reload();
+}
+
 
 // Collision.
 function giftCollision(){
@@ -236,7 +242,7 @@ function giftCollision(){
     const giftCollision = giftCollisionX && giftCollisionY;
     if (giftCollision){
        nextLevel();
-    }else if (level == 6){
+    }else if (level > 6){
         gameWin();
     }
 }
@@ -252,5 +258,3 @@ function giftCollision(){
         levelFail();
     }
 } */
-
-

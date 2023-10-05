@@ -5,6 +5,7 @@
 }
 html{
     font-size: 62.5%;
+    font-family: 'Silkscreen', cursive;
 }
 body{
     font-size: 1.8rem;
@@ -14,28 +15,62 @@ body{
     position: relative;
     width:100vw;
     height: 100vh;
-    background-color: blueviolet;
+    background-color: #4E2B4B;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 }
 canvas{
-    margin-top:2rem;
+    margin-top:6rem;
     border: 2px solid white;
     border-radius: .5rem;
-    background-color:darkseagreen;
+    background-color:#92ABB6;
 }
 
 .notifications{
-    width: 50rem;
-    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 54rem;
+    height: 30rem;
     background-color: white;
     position: absolute;
-    top:10rem;
+    top:14rem;
+    background-color:#012030;
+    border-radius: 2rem;
 }
+
+.notifications p {
+    font-size: 2.5rem;
+    text-align: center;
+    color :green;
+}
+
 .active{
     display: none;
+}
+
+.notifications .restart{
+    margin-top: 2rem;
+    display: flex;
+    gap:5rem;
+}
+
+.notifications .restart button {
+    padding: 1rem;
+    font-family: 'Silkscreen', cursive;
+    background: transparent;
+    color: green;
+    font-size: 1.8rem;
+    box-shadow: 1px 1px 1px 0 rgba(173, 171, 171, 0.808);
+    cursor:pointer;
+}
+
+.notifications .restart button:hover{
+    background-color: green;
+    color:white;
 }
 
 
@@ -48,7 +83,7 @@ canvas{
 
 .game-container .btns button{
     border-radius: 2rem;
-    background-color: bisque;
+    background-color: #92ABB6;
     box-shadow: 1px 2px 0px 1px;
     cursor:pointer;
 }
@@ -86,6 +121,7 @@ canvas{
 }
 
 .game-container .messages{
+    color:#EEE4AF;
     font-size: 3rem;
     font-weight: bold;
 }
